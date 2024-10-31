@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # 加载配置文件和权重
-config_file = 'configs/detr/detr_r50_xjh.py'
+config_file = 'configs/detr/detr_hyperparameters.py'
 checkpoint_file = 'detr_r50_8xb2-150e_coco_20221023_153551-436d03e8.pth'
 model = init_detector(config_file, checkpoint_file, device='cuda:0')
 
