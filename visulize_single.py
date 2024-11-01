@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-# 加载配置文件和权重
+# 加载模型和权重
 config_file = 'configs/detr/detr_hyperparameters.py'
 checkpoint_file = 'detr_r50_8xb2-150e_coco_20221023_153551-436d03e8.pth'
 model = init_detector(config_file, checkpoint_file, device='cuda:0')
@@ -28,7 +28,7 @@ class_names = [
 
 colors = np.random.randint(0, 255, size=(len(class_names), 3)).astype(int)
 # 进行推理
-img = '1.jpg'  # 你的图片路径
+img = 'D9.jpg' 
 result = inference_detector(model, img)
 
 # 加载图片
@@ -43,9 +43,8 @@ labels = result.pred_instances.labels  # 获取类别标签
 
 # 绘制每一个检测结果
 for i in range(len(bboxes)):
-    if scores[i] > 0.7:  # 只处理高置信度的框
-        # x1, y1, x2, y2 = bboxes[i].int()  # 使用 .int() 转换为整数类型。
-        # 转换 Tensor 为整数坐标
+    if scores[i] > 0.3:  # 只处理高置信度的框
+        # x1, y1, x2, y2 = bboxes[i].int()  # 使用 .int() 将Tensor转换为整数坐标转换为整数类型。
         x1, y1, x2, y2 = int(bboxes[i][0].item()), int(bboxes[i][1].item()), int(bboxes[i][2].item()), int(bboxes[i][3].item())
 
         class_id = labels[i].item()  # 确保 class_id 是整数
